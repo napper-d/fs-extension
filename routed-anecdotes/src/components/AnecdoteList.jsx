@@ -7,10 +7,9 @@ const AnecdoteList = () =>{
       <h2>Anecdotes</h2>
       <ul>
         {anecdotes.map(anecdote =>
-          <div>
-            <li key={anecdote.id}>{anecdote.content}</li>
+          <li key={anecdote.id}>{anecdote.content}
             <button onClick={() => deleteAnecdote(anecdote.id)}>delete</button>
-          </div>
+          </li>
         )}
       </ul>
     </div>
