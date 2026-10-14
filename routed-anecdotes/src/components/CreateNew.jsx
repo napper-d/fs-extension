@@ -7,9 +7,9 @@ const CreateNew = ({ addNew }) => {
   const info = useField("text")
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    addNew({ content: content.field.value.value, author: author.field.value, info: info.field.value, votes: 0 })
+    await addNew({ content: content.field.value, author: author.field.value, info: info.field.value, votes: 0 })
     navigate("/")
   }
 
