@@ -44,7 +44,7 @@ register(server, 'server', { longRunning: true })
 
 // ---- 前端：等后端就绪后再启动 vite ----
 const waitOnBin = require.resolve('wait-on/bin/wait-on')
-const waiter = spawn('node', [waitOnBin, 'http://localhost:3003/api/blogs'], {
+const waiter = spawn('node', [waitOnBin, 'http://localhost:3001/api/blogs'], {
   stdio: 'inherit',
 })
 register(waiter, 'wait-on') // wait-on 是一次性任务，退出不触发 shutdown

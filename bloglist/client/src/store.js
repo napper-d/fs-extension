@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import blogService from './services/BlogService'
 import loginService from './services/LoginService'
 import userService from './services/UserService'
+import persistentUser from './services/persistentUser'
 
 const useMessageStore = create((set) => ({
   message : null,
@@ -72,9 +73,8 @@ const useUserStore = create((set,get) => ({
     setUsername : (username) => set({ username }),
     setPassword : (password) => set({ password }),
     initUser : () => {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
-      if (loggedUserJSON) {
-        const user = JSON.parse(loggedUserJSON)
+      const user = persistentUser.getUser()
+      if (user) {
         set({ user })
         blogService.setToken(user.token)
       }
@@ -83,15 +83,13 @@ const useUserStore = create((set,get) => ({
       const { username, password } = get()
       const user = await loginService.login({ username, password })
       set({ user })
-      window.localStorage.setItem(
-        'loggedNoteappUser', JSON.stringify(user)
-      )
+      persistentUser.saveUser(user)
       blogService.setToken(user.token)
     },
     logout : () => {
       set({ user : null, userName : '', password : '' })
       blogService.setToken('')
-      window.localStorage.removeItem('loggedNoteappUser')
+      persistentUser.removeUser()
     }
   }
 }))

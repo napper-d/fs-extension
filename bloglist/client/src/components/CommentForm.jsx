@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { Alert, Box, Button, TextField } from '@mui/material'
 import { useBlogActions } from '../store'
 
-const InputField = ({ label, value, onChange }) => (
+const InputField = ({ label, value, onChange, ...rest }) => (
   <TextField
+    {...rest}
     placeholder={label}
     value={value}
     onChange={onChange}
@@ -43,7 +44,7 @@ const CommentForm = ({ blogId }) => {
           }}
         >
           <InputField
-            label="content"
+            label="comment"
             value={content}
             onChange={({ target }) => setContent(target.value)}
             sx={{ flex: 1 }}
