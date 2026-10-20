@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "build": "npm run build --prefix client",
+    "start": "NODE_ENV=production npm start --prefix server"
+  },
+  "devDependencies": {
+    "tree-kill": "^1.2.2",
+    "wait-on": "^9.5.1"
+  }
+}
